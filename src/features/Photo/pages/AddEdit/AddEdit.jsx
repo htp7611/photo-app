@@ -1,6 +1,6 @@
+import Banner from 'components/Banner/Banner';
+import PhotoForm from 'features/Photo/components/PhotoForm/PhotoForm';
 import React from 'react';
-import Banner from "../../../../components/Banner/Banner";
-import PhotoForm from "../../components/PhotoForm/PhotoForm";
 
 AddEditPage.propTypes = {};
 
