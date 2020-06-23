@@ -5,13 +5,15 @@ import {Button} from "reactstrap";
 RandomPhoto.propTypes = {
   name: PropTypes.string,
   imageUrl: PropTypes.string,
+  isInvalid: PropTypes.string,
   onImageUrlChange: PropTypes.func,
-  onRandomButtonBlur: PropTypes.func
+  onRandomButtonBlur: PropTypes.func,
 }
 
 RandomPhoto.defaultProps = {
   name: '',
   imageUrl: '',
+  isInvalid: '',
   onImageUrlChange: null,
   onRandomButtonBlur: null,
 }
@@ -23,7 +25,7 @@ const getRandomImageUrl = () => {
 
 function RandomPhoto(props) {
 
-  const {name, imageUrl, onImageUrlChange, onRandomButtonBlur} = props;
+  const {name, imageUrl, onImageUrlChange, onRandomButtonBlur, isInvalid} = props;
 
   const handleRandomPhotoClick = async () => {
     if (onImageUrlChange) {
@@ -33,7 +35,7 @@ function RandomPhoto(props) {
   }
 
   return (
-      <div className='random-photo'>
+      <div className={isInvalid ? `random-photo ${isInvalid} ` : 'random-photo'}>
         <div className='random-photo__button'>
           <Button
               outline

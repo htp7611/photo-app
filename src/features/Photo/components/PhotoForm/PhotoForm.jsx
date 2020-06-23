@@ -6,6 +6,7 @@ import {Button, FormGroup} from 'reactstrap';
 import InputField from 'custom-field/input-field';
 import SelectField from 'custom-field/selection-field';
 import RandomPhotoField from "../../../../custom-field/random-photo-field";
+import * as Yup from 'yup';
 
 PhotoForm.propTypes = {
   onSubmit: PropTypes.func
@@ -19,16 +20,28 @@ function PhotoForm() {
 
   const initialValues = {
     title: '',
-    categoryId: null
+    categoryId: null,
+    photo: ''
   }
+
+  const validationSchema = Yup.object().shape({
+    title: Yup.string().required('This field is required.'),
+    categoryId: Yup.number().required('This field is required.').nullable(),
+    photo: Yup.string().when('categoryId', {
+      is: 1,
+      then: Yup.string().required('This field is required.'),
+      otherwise: Yup.string().notRequired()
+    }),
+  });
+
   return (
       <Formik
           initialValues={initialValues}
-          onSubmit={values => console.log('Submit form:' + values.photo)}
+          validationSchema={validationSchema}
+          onSubmit={values => console.log('Submit form:' + values)}
       >
         {formikProps => {
-          const {values, error, touched} = formikProps
-          console.log(values, error, touched);
+          const {values, errors, touched} = formikProps;
 
           return (
               <Form>
