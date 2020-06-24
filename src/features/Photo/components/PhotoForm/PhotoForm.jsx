@@ -16,7 +16,7 @@ PhotoForm.defaultProps = {
   onSubmit: null
 }
 
-function PhotoForm() {
+function PhotoForm(props) {
 
   const initialValues = {
     title: '',
@@ -38,7 +38,7 @@ function PhotoForm() {
       <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={values => console.log('Submit form:' + values)}
+          onSubmit={props.onSubmit}
       >
         {formikProps => {
           const {values, errors, touched} = formikProps;
